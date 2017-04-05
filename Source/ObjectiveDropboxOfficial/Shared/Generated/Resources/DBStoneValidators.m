@@ -11,16 +11,16 @@
                                 pattern:(NSString *)pattern {
 
   void (^validator)(NSString * _Nonnull) = ^(NSString * _Nonnull value) {
-    __unused NSUInteger length = [value length];
+     __unused NSUInteger length = [value length];
 
     if (minLength) {
-      __unused NSString *message =
+        __unused NSString *message =
           [NSString stringWithFormat:@"\"%@\" must be at least %@ characters", value, [minLength stringValue]];
       NSAssert(length >= [minLength unsignedIntegerValue], message);
     }
 
     if (maxLength) {
-      __unused NSString *message =
+       __unused NSString *message =
           [NSString stringWithFormat:@"\"%@\" must be at most %@ characters", value, [maxLength stringValue]];
       NSAssert(length <= [maxLength unsignedIntegerValue], message);
     }
@@ -40,14 +40,12 @@
 + (void (^)(NSNumber *))numericValidator:(NSNumber *)minValue maxValue:(NSNumber *)maxValue {
   void (^validator)(NSNumber * _Nonnull) = ^(NSNumber * _Nonnull value) {
     if (minValue) {
-      __unused NSString *message =
-          [NSString stringWithFormat:@"\"%@\" must be at least %@", value, [minValue stringValue]];
+      __unused NSString *message = [NSString stringWithFormat:@"\"%@\" must be at least %@", value, [minValue stringValue]];
       NSAssert([value unsignedIntegerValue] >= [minValue unsignedIntegerValue], message);
     }
 
     if (maxValue) {
-      __unused NSString *message =
-          [NSString stringWithFormat:@"\"%@\" must be at most %@", value, [maxValue stringValue]];
+      __unused NSString *message = [NSString stringWithFormat:@"\"%@\" must be at most %@", value, [maxValue stringValue]];
       NSAssert([value unsignedIntegerValue] <= [maxValue unsignedIntegerValue], message);
     }
   };
@@ -68,8 +66,7 @@
     }
 
     if (maxItems) {
-      __unused NSString *message =
-          [NSString stringWithFormat:@"\"%@\" must be at most %@ items", value, [maxItems stringValue]];
+      __unused NSString *message = [NSString stringWithFormat:@"\"%@\" must be at most %@ items", value, [maxItems stringValue]];
       NSAssert(count <= [maxItems unsignedIntegerValue], message);
     }
 
