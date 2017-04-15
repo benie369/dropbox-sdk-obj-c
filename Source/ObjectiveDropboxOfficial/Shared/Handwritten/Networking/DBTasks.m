@@ -11,6 +11,17 @@
 #import "DBTransportBaseClient+Internal.h"
 #import "DBTransportBaseClient.h"
 
+#pragma mark - FileSystem default implementation
+
+@implementation DBFileSystemDefault
+
++(nullable NSData*)dataWithContentsOfFile:(nonnull NSString *)path {
+    return [NSData dataWithContentsOfFile:path];
+}
+
+@end
+
+
 #pragma mark - Base network task
 
 @implementation DBTask : NSObject
@@ -57,6 +68,21 @@
       exceptionWithName:NSInternalInconsistencyException
                  reason:[NSString stringWithFormat:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)]
                userInfo:nil];
+}
+
+-(id<DBFileSystemProtocol>)fileSystemDelegate {
+    if (_fileSystemDelegate) {
+        return _fileSystemDelegate;
+    }
+    
+    static dispatch_once_t predicate;
+    static DBFileSystemDefault *sharedObject = nil;
+    
+    dispatch_once(&predicate, ^{
+        sharedObject = [[DBFileSystemDefault alloc] init];
+    });
+    
+    return sharedObject;
 }
 
 @end
@@ -434,7 +460,7 @@
         networkError = [[DBRequestError alloc] initAsClientError:serializationError];
       } else {
         result = !route.resultType ? [DBNilObject new] : result;
-        downloadContent = [NSData dataWithContentsOfFile:[location path]];
+        downloadContent = [self.fileSystemDelegate dataWithContentsOfFile:[location path]];
         successful = YES;
       }
     }

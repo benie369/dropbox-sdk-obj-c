@@ -9,6 +9,20 @@
 @class DBRequestError;
 @class DBRoute;
 
+#pragma merk - FileSystem protocol
+
+@protocol DBFileSystemProtocol <NSObject>
+
++(nullable NSData*)dataWithContentsOfFile:(nonnull NSString  *)path;
+
+@end
+
+@interface DBFileSystemDefault: NSObject<DBFileSystemProtocol>
+
++(nullable NSData*)dataWithContentsOfFile:(nonnull NSString  *)path;
+
+@end
+
 #pragma mark - Base network task
 
 ///
