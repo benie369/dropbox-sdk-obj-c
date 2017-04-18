@@ -50,6 +50,8 @@ NS_ASSUME_NONNULL_BEGIN
   NSOperationQueue *_queue;
 }
 
+@property (nonatomic, retain) _Nonnull id<DBFileSystemProtocol> fileSystemDelegate;
+
 @property (nonatomic) int retryCount;
 
 - (nonnull instancetype)initWithRoute:(DBRoute *)route;
