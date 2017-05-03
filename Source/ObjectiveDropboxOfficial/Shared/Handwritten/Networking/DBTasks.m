@@ -15,7 +15,7 @@
 
 @implementation DBFileSystemDefault
 
-+(nullable NSData*)dataWithContentsOfFile:(nonnull NSString *)path {
+-(nullable NSData*)dataWithContentsOfFile:(nonnull NSString *)path {
     return [NSData dataWithContentsOfFile:path];
 }
 

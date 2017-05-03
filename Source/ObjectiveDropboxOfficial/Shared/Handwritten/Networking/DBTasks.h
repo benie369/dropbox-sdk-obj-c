@@ -13,13 +13,13 @@
 
 @protocol DBFileSystemProtocol <NSObject>
 
-+(nullable NSData*)dataWithContentsOfFile:(nonnull NSString  *)path;
+-(nullable NSData*)dataWithContentsOfFile:(nonnull NSString  *)path;
 
 @end
 
 @interface DBFileSystemDefault: NSObject<DBFileSystemProtocol>
 
-+(nullable NSData*)dataWithContentsOfFile:(nonnull NSString  *)path;
+-(nullable NSData*)dataWithContentsOfFile:(nonnull NSString  *)path;
 
 @end
 
